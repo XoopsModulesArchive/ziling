@@ -1,0 +1,27 @@
+2003-06-25  wjue
+
+   *version 2.02
+   *added conversion for xml files
+
+2003-05-20  wjue
+   *version 2.01
+
+   *fixed non chinese version browser causes infinite loop in browser detection routine problem
+
+2003-04-23   wjue (wjue@hotmail.com)
+
+  *minor typo error fixed v2.0a
+  
+2003-04-18   wjue (wjue@hotmail.com)
+     
+  *release 2.0
+  
+  *Fixed browser detection bug in gb2312 encoding
+  
+  *added zh-hk, zh-mo, zh-hk and zh detection
+  
+  *Simplified the config, just deux parameters are nedded.
+   
+2003-04-10   wjue (wjue@hotmail.com)
+     
+  *First public release 1.0 

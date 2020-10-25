@@ -1,0 +1,120 @@
+// ------------------------------------------------------------------------- //
+//		Ziling Universal Chinese Language Encoding Conversion Tool  //
+//				    Version:  2.00       			     		            //
+//				   General Framework                                        //
+//				<http://www.wjue.org>						                 //
+// ------------------------------------------------------------------------- //
+// Author: Wang Jue (alias wjue)   								  //
+// Purpose: GB-BIG5 automatic conversion               	  //
+// email:  wjue@wjue.org                                                     //
+// URL: http://www.wjue.org                                              //
+//      http://www.guanxiCRM.com                                             //
+// ------------------------------------------------------------------------- //
+//  This program is free software; you can redistribute it and/or modify	  //
+//  it under the terms of the GNU General Public License as published by	  //
+//  the Free Software Foundation; either version 2 of the License, or 	  //
+//  (at your option) any later version. 							  //
+//															  //
+//  This program is distributed in the hope that it will be useful,		  //
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of		  //
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the		  //
+//  GNU General Public License for more details.						  //
+//
+//  Using Ziling Universal Chinese Language Encoding Conversion Tool with Xoops
+
+
+Installation Notice for using with Xoops 2.x CMS  
+
+GB <-> BIG5 cross conversion tools
+With this package your website will be readable both on GB coding and BIG5 coding
+
+Important Notice !
+
+Please check update of Ziling at these websites 
+
+   http://www.wjue.org
+   http://www.guanxiCRM.com
+   
+   
+If you want to use Ziling other than with Xoops CMS please read install.txt file of this package   
+
+Step1.   unpack all files of the package (with subdir structure) in the directory under your 
+         Xoops Root dir.
+
+         ex. /www/xoops/
+
+Step2.   edit the ziling_header.php file, put the config to suit your needs.
+
+Step3.   edit the Xoops Root Dir's header.php file, make the following line the FIRST line of code
+         of this file, just after the openning <?php tag
+
+         include_once XOOPS_ROOT_PATH.'/ziling/ziling_header.php';
+         
+Step4.   edit the Xoops Root Dir's footer.php file, make the following line the LAST line of code
+         of this file, just nefore the ending ?> tag
+
+         include_once XOOPS_ROOT_PATH.'/ziling/ziling_footer.php';
+
+         in footer.php file, find the block of code (near line 61):
+
+		if (!headers_sent()) {
+			header ('Content-Type:text/html; charset='._CHARSET);
+			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+			header('Cache-Control: no-store, no-cache, max-age=1, s-maxage=1, must-revalidate, post-check=0, pre-check=0');
+		}
+         
+        replace it with:
+
+		if (!headers_sent()) {
+			header ('Content-Type:text/html; charset='.(in_array(strtolower($c_lang), array("big5","gb2312")))? $c_lang: _CHARSET);
+			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+			header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+			header('Cache-Control: no-store, no-cache, max-age=1, s-maxage=1, must-revalidate, post-check=0, pre-check=0');
+		}
+
+
+Step5.(optional)   If your want to offer a choice for users to chose the character set, be sure to put the following code at a suitable position into your html file, generally withing "the menu section"
+
+<!-- Begin of Code to be inserted in html file -->
+<script type='text/javascript'>
+var where,i;
+where=window.location.href;
+i=where.lastIndexOf('c_lang');
+if (i>0) where=where.substring(0,i-1);
+if (where.lastIndexOf('?')>0){
+document.write('<a href='+where+'&c_lang=gb2312'+'><font color='+'#FFFFFF'+'>Â²Åé</font></a>¡@');
+document.write('<a href='+where+'&c_lang=big5'+'><font color='+'#FFFFFF'+'>ÁcÅé</font></a>');
+} else {
+document.write('<a href='+where+'?c_lang=gb2312'+'><font color='+'#FFFFFF'+'>Â²Åé</font></a>¡@');
+document.write('<a href='+where+'?c_lang=big5'+'><font color='+'#FFFFFF'+'>ÁcÅé</font></a>');
+}
+</script>
+<!-- End Code to be inserted in html file -->
+
+That's all folk !
+
+
+An example of usage is provided in file "example.php"
+
+
+
+If you are using Xoops 2.0 Final just copy and overwrite:
+
+    header.php.xoops20_final    to       header.php
+    footer.php.xoops20_final    to       footer.php 
+
+and configure ziling_header.php file.
+
+
+
+Visit either
+
+   http://www.wjue.org          (chinese)
+   http://www.guanxiCRM.com     (english)
+
+   For question and support.
+
+Enjoy.
+
+
